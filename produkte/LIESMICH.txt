@@ -1,0 +1,91 @@
+KOMPLETTPAKET FUER SELBSTSTAENDIGE UND KLEINUNTERNEHMER
+=======================================================
+
+Vielen Dank fuer deinen Kauf. Dieses Paket enthaelt sieben Werkzeuge,
+die zusammen den kaufmaennischen Alltag eines Solo-Selbstaendigen abdecken.
+
+
+WOMIT DU ANFAENGST
+------------------
+
+Wenn du gerade erst gruendest:
+   1. Gruender-Checkliste-14-Tage.pdf
+   2. Steuerfristen-Kalender-2026-2027.pdf
+   3. Stundensatz-Kalkulator.xlsx
+
+Wenn du schon laufend arbeitest:
+   1. EUER-Vorlage-Kleinunternehmer.xlsx
+   2. Rechnungsvorlage-Pflichtangaben.xlsx
+   3. GoBD-Belegsystem-Leitfaden.pdf
+
+
+INHALT
+------
+
+1. Gruender-Checkliste-14-Tage.pdf
+   Ablaufplan von der Idee bis zur ersten Rechnung. 18 Schritte zum Abhaken.
+
+2. Stundensatz-Kalkulator.xlsx
+   Rechnet rueckwaerts von deinem Wunsch-Netto zum noetigen Stundensatz.
+   Inklusive Projektkalkulation und Vergleich verschiedener Saetze.
+
+3. Rechnungsvorlage-Pflichtangaben.xlsx
+   Rechnungsformular mit automatischer Pruefung aller neun Pflichtangaben
+   nach Paragraf 14 UStG. Plus Rechnungsbuch mit Zahlungsueberwachung.
+
+4. EUER-Vorlage-Kleinunternehmer.xlsx
+   Einnahmen-Ueberschuss-Rechnung mit 18 Ausgabenkategorien, Monatsuebersicht
+   und Warnung bei Annaeherung an die Kleinunternehmergrenze.
+
+5. Fahrtenbuch-finanzamtskonform.xlsx
+   Fahrtenbuch mit Pflichtangaben-Pruefung und automatischem Vergleich
+   Fahrtenbuch gegen 1-Prozent-Regelung.
+
+6. GoBD-Belegsystem-Leitfaden.pdf
+   Ordnerstruktur, Namenskonvention und Aufbewahrungsfristen fuer die
+   digitale Belegablage.
+
+7. GoBD-Belegregister.xlsx
+   Belegregister mit Pruefung auf doppelte Nummern und fehlende Angaben,
+   plus ausfuellbare Verfahrensdokumentation.
+
+8. Steuerfristen-Kalender-2026-2027.pdf
+   Alle Termine fuer zwei Jahre, mit Angabe wen sie betreffen und was
+   ein Versaeumnis kostet.
+
+
+SO ARBEITEST DU MIT DEN EXCEL-DATEIEN
+-------------------------------------
+
+Gelb hinterlegte Felder sind zum Ausfuellen.
+Alles andere rechnet sich automatisch - bitte nicht ueberschreiben.
+
+Jede Datei hat ein Blatt "Anleitung". Dort steht, was zu tun ist.
+
+Die Dateien funktionieren mit Excel, LibreOffice, Numbers und
+Google Tabellen.
+
+
+WICHTIGER HINWEIS
+-----------------
+
+Alle Inhalte dieses Pakets sind Arbeitshilfen. Sie sind KEINE Steuer-
+und keine Rechtsberatung und ersetzen weder einen Steuerberater noch
+einen Rechtsanwalt.
+
+Fuer die Richtigkeit deiner Angaben gegenueber Finanzamt und Behoerden
+bist ausschliesslich du verantwortlich. Bei Unsicherheiten frage einen
+Steuerberater.
+
+Steuerrecht aendert sich. Rechtsstand aller Unterlagen: August 2026.
+Pruefe die genannten Grenzwerte und Fristen vor jeder Verwendung.
+
+
+NUTZUNGSRECHTE
+--------------
+
+Du darfst diese Dateien fuer deine eigene selbstaendige Taetigkeit
+uneingeschraenkt nutzen und anpassen.
+
+Nicht gestattet ist die Weitergabe, der Weiterverkauf oder die
+Veroeffentlichung der Dateien an Dritte.

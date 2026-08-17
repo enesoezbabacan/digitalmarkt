@@ -1,0 +1,98 @@
+AUTOMATEN-STARTERPAKET
+======================
+
+Vielen Dank fuer deinen Kauf. Dieses Paket enthaelt drei Werkzeuge fuer
+angehende und aktive Automatenaufsteller - von der Standortsuche bis zur
+laufenden Betreuung.
+
+
+WOMIT DU ANFAENGST
+------------------
+
+Wenn du noch keinen Automaten hast:
+   1. Automaten-Standort-Checkliste.pdf   (erst lesen, dann suchen)
+   2. Automaten-Rentabilitaetsrechner.xlsx (jeden Standort durchrechnen)
+
+Wenn du schon aufgestellt hast:
+   1. Automaten-Wartungsplaner.xlsx        (Ueberblick schaffen)
+   2. Automaten-Rentabilitaetsrechner.xlsx (pruefen, ob es sich noch traegt)
+
+
+INHALT
+------
+
+1. Automaten-Standort-Checkliste.pdf
+   Sechs Seiten zum Ausdrucken. Wo du Standorte findest und wie du sie
+   ansprichst, ein Bewertungsbogen mit Punktesystem zum Mitnehmen, die
+   Technik vor Ort, und was im Standortvertrag geregelt sein muss.
+
+2. Automaten-Rentabilitaetsrechner.xlsx
+   Rechnet einen Standort vollstaendig durch - einschliesslich der Posten,
+   die in Ueberschlagsrechnungen fehlen: eigene Fahrten, Arbeitszeit,
+   Strom, Schwund, Reparaturruecklage. Ergebnis ist der Break-even in
+   Verkaeufen pro Tag. Zusaetzlich ein Blatt zum Vergleich von bis zu
+   acht Standorten und eine Produktkalkulation je Artikel.
+
+3. Automaten-Wartungsplaner.xlsx
+   Automatenstamm mit Wartungsfaelligkeit, Befuellprotokoll,
+   Kassenabrechnung und eine Auswertung, die dir zeigt, welcher Artikel
+   an welchem Standort laeuft - und welcher nur Kapital bindet.
+
+
+DIE REIHENFOLGE, DIE SICH BEWAEHRT
+----------------------------------
+
+   1. Checkliste lesen, damit du weisst, wonach du suchst.
+   2. Standort besichtigen, Bewertungsbogen ausfuellen.
+   3. Kommt er ueber 15 Punkte: im Rentabilitaetsrechner durchrechnen.
+   4. Traegt er sich: schriftliche Vereinbarung, dann aufstellen.
+   5. Ab dann laufend im Wartungsplaner mitschreiben.
+
+Der haeufigste Fehler ist, Schritt 3 zu ueberspringen. Ein Standort
+fuehlt sich fast immer besser an, als er rechnet.
+
+
+SO ARBEITEST DU MIT DEN EXCEL-DATEIEN
+-------------------------------------
+
+Gelb hinterlegte Felder mit blauer Schrift sind zum Ausfuellen.
+Alles andere rechnet sich automatisch - bitte nicht ueberschreiben.
+
+Jede Datei hat ein Blatt "Anleitung". Dort steht, was zu tun ist.
+
+Die Dateien funktionieren mit Excel, LibreOffice, Numbers und
+Google Tabellen. Es werden bewusst nur alte, ueberall unterstuetzte
+Formeln verwendet.
+
+
+WICHTIGER HINWEIS
+-----------------
+
+Alle Inhalte dieses Pakets sind Arbeitshilfen. Sie sind KEINE Rechts-
+und keine Steuerberatung.
+
+Alle genannten Zahlen - Verkaufsquoten, Stromverbrauch, Anschaffungs-
+und Reparaturkosten, uebliche Umsatzbeteiligungen - sind Erfahrungswerte
+und ausdruecklich keine Zusicherung. Sie schwanken je nach Region,
+Branche und Warenangebot erheblich. Pruefe sie fuer deinen eigenen Fall.
+
+Die Checkliste nennt die Punkte, die ein Standortvertrag regeln sollte.
+Sie enthaelt bewusst KEINE Vertragsformulierungen. Lass einen Vertrag,
+den du dauerhaft verwenden willst, einmalig anwaltlich aufsetzen.
+
+Bei Automatenverkaeufen gelten fuer Speisen und Getraenke unterschiedliche
+Umsatzsteuersaetze. Die Einordnung deiner Artikel gehoert zu deinem
+Steuerberater - in der Produktkalkulation traegst du den Satz je Artikel
+selbst ein.
+
+Stand: August 2026.
+
+
+NUTZUNGSRECHTE
+--------------
+
+Du darfst diese Dateien fuer deine eigene Taetigkeit uneingeschraenkt
+nutzen und anpassen.
+
+Nicht gestattet ist die Weitergabe, der Weiterverkauf oder die
+Veroeffentlichung der Dateien an Dritte.

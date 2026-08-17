@@ -1,69 +1,146 @@
-import Image from "next/image";
+import Link from "next/link";
 
-export default function Home() {
+import { db } from "@/lib/db";
+import { formatEuro } from "@/lib/geld";
+import { preisHinweis } from "@/lib/preis-hinweis";
+
+/**
+ * Öffentlicher Katalog.
+ *
+ * Server Component: die Produktdaten werden auf dem Server geladen und nur
+ * fertiges HTML ausgeliefert. Preise kommen dadurch immer aus der Datenbank
+ * und nie aus dem Browser — im Frontend manipulierte Preise gibt es hier nicht.
+ */
+export default async function Startseite({ searchParams }: PageProps<"/">) {
+  const parameter = await searchParams;
+  const suche = typeof parameter.suche === "string" ? parameter.suche : "";
+  const kategorie =
+    typeof parameter.kategorie === "string" ? parameter.kategorie : "";
+
+  const [produkte, kategorien] = await Promise.all([
+    db().katalog({ suche, kategorie }),
+    db().kategorien(),
+  ]);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div>
+      <section className="mb-8">
+        <h1 className="text-3xl font-semibold tracking-tight">
+          Digitale Produkte, sofort zum Download
+        </h1>
+        <p className="mt-2 max-w-2xl text-neutral-600">
+          E-Books, Vorlagen, Presets und Kurse von unabhängigen Verkäufern. Nach
+          dem Kauf bekommst du den Download-Link sofort per E-Mail.
+        </p>
+        {/*
+          Einstieg in die Themenseite. Sie ist der Teil des Marktplatzes, den
+          Suchmaschinen überhaupt bewerten können — Produktkacheln allein
+          ranken für nichts.
+        */}
+        <p className="mt-3 text-sm">
+          <Link href="/automaten" className="underline hover:no-underline">
+            Für Automatenaufsteller: Rechnet sich ein Snackautomat?
+          </Link>
+        </p>
+      </section>
+
+      <form className="mb-6 flex flex-wrap items-end gap-3">
+        <div className="min-w-56 flex-1">
+          <label
+            htmlFor="suche"
+            className="mb-1 block text-sm font-medium text-neutral-700"
           >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            Suche
+          </label>
+          <input
+            id="suche"
+            name="suche"
+            type="search"
+            defaultValue={suche}
+            placeholder="z. B. Notion-Vorlage"
+            className="w-full rounded-md border border-neutral-300 px-3 py-2"
+          />
         </div>
-      </main>
+
+        <div className="min-w-48">
+          <label
+            htmlFor="kategorie"
+            className="mb-1 block text-sm font-medium text-neutral-700"
+          >
+            Kategorie
+          </label>
+          <select
+            id="kategorie"
+            name="kategorie"
+            defaultValue={kategorie}
+            className="w-full rounded-md border border-neutral-300 bg-white px-3 py-2"
+          >
+            <option value="">Alle Kategorien</option>
+            {kategorien.map((k) => (
+              <option key={k} value={k}>
+                {k}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <button
+          type="submit"
+          className="rounded-md bg-neutral-900 px-4 py-2 font-medium text-white hover:bg-neutral-700"
+        >
+          Filtern
+        </button>
+        {(suche || kategorie) && (
+          <Link
+            href="/"
+            className="rounded-md px-3 py-2 text-sm text-neutral-600 hover:bg-neutral-100"
+          >
+            Zurücksetzen
+          </Link>
+        )}
+      </form>
+
+      {produkte.length === 0 ? (
+        <p className="rounded-lg border border-dashed border-neutral-300 p-10 text-center text-neutral-500">
+          {suche || kategorie
+            ? "Zu dieser Suche gibt es noch keine Produkte."
+            : "Es sind noch keine Produkte freigeschaltet."}
+        </p>
+      ) : (
+        <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {produkte.map((produkt) => (
+            <li key={produkt.id}>
+              <Link
+                href={`/produkt/${produkt.id}`}
+                className="flex h-full flex-col rounded-lg border border-neutral-200 p-4 transition hover:border-neutral-400"
+              >
+                <span className="text-xs font-medium tracking-wide text-neutral-500 uppercase">
+                  {produkt.kategorie}
+                </span>
+                <h2 className="mt-1 font-semibold">{produkt.titel}</h2>
+                <p className="mt-2 line-clamp-3 flex-1 text-sm text-neutral-600">
+                  {produkt.beschreibung}
+                </p>
+                <div className="mt-4">
+                  <span className="text-lg font-semibold">
+                    {formatEuro(produkt.preis_cent)}
+                  </span>
+                  {/*
+                    Preisangabenverordnung: Der Hinweis muss zutreffen.
+                    Kleinunternehmer weisen keine USt aus — siehe preis-hinweis.ts.
+                  */}
+                  <span className="mt-0.5 block text-xs text-neutral-500">
+                    {preisHinweis(produkt.verkaeufer.kleinunternehmer)}
+                  </span>
+                </div>
+                <span className="mt-1 text-xs text-neutral-500">
+                  von {produkt.verkaeufer.name}
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
