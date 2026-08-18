@@ -18,7 +18,19 @@ export async function stripeStatusLaden(
 ): Promise<StripeStatus> {
   if (!stripeKontoId) return { verbunden: false };
 
-  const konto = await stripe().accounts.retrieve(stripeKontoId);
+  // Eine gespeicherte Kontonummer heisst nicht, dass Stripe sie noch kennt.
+  // Beim Wechsel vom Test- in den Echtbetrieb bleibt die alte Nummer stehen,
+  // gehoert dort aber zu einem anderen Stripe-Konto. Ohne diesen Fang wirft
+  // der Abruf, und der Verkaeufer sieht statt seines Bereichs eine
+  // Fehlerseite — ausgerechnet dort, wo er das Problem beheben koennte.
+  // "Nicht verbunden" ist hier die ehrliche Antwort: aus Sicht des
+  // Echtbetriebs gibt es dieses Konto tatsaechlich nicht.
+  let konto;
+  try {
+    konto = await stripe().accounts.retrieve(stripeKontoId);
+  } catch {
+    return { verbunden: false };
+  }
 
   return {
     verbunden: true,
