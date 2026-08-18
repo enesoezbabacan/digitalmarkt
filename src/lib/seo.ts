@@ -60,6 +60,7 @@ export const GESPERRTE_PFADE = [
   "/download",
   "/kauf",
   "/passwort-neu",
+  "/passwort-vergessen",
   "/anmelden",
   "/abmelden",
 ];

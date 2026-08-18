@@ -56,9 +56,17 @@ export default async function Anmelden({ searchParams }: PageProps<"/anmelden">)
         </div>
 
         <div>
-          <label htmlFor="passwort" className="mb-1 block text-sm font-medium">
-            Passwort
-          </label>
+          <div className="mb-1 flex items-baseline justify-between gap-4">
+            <label htmlFor="passwort" className="block text-sm font-medium">
+              Passwort
+            </label>
+            <Link
+              href="/passwort-vergessen"
+              className="text-sm text-neutral-600 underline"
+            >
+              Passwort vergessen?
+            </Link>
+          </div>
           <input
             id="passwort"
             name="passwort"
