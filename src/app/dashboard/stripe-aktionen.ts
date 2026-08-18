@@ -43,6 +43,20 @@ export async function stripeOnboardingStarten(): Promise<void> {
 
   let stripeKontoId = verkaeufer.stripe_account_id;
 
+  // Eine gespeicherte Kontonummer heisst nicht, dass es das Konto noch gibt.
+  // Beim Wechsel vom Test- in den Echtbetrieb bleibt die alte Nummer stehen,
+  // gehoert dort aber zu einem anderen Stripe-Konto — der Onboarding-Link
+  // waere dann nicht zu erzeugen und der Verkaeufer saesse fest, ohne dass
+  // ihm jemand die Nummer aus der Datenbank raeumt. Deshalb erst nachsehen
+  // und im Zweifel neu anlegen.
+  if (stripeKontoId) {
+    try {
+      await stripe().accounts.retrieve(stripeKontoId);
+    } catch {
+      stripeKontoId = null;
+    }
+  }
+
   if (!stripeKontoId) {
     const konto = await stripe().accounts.create({
       type: "express",
