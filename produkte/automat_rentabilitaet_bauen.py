@@ -373,9 +373,10 @@ block(sr, r, "KOSTEN DES STANDORTS"); r += 1
 r = zeile(sr, r, "Modell der Standortvergütung", "fest", eingabe=True,
           hinweis='Trag "fest" oder "prozentual" ein. Danach nur das passende Feld ausfüllen.')
 ZEILE_MODELL = r - 1
-r = zeile(sr, r, "  feste Miete pro Monat", 30.0, EURO, eingabe=True,
-          hinweis="Übliche Spanne 0 bis 80 €. Viele Standorte geben die Fläche umsonst her, "
-                  "wenn der Automat gewünscht ist.")
+r = zeile(sr, r, "  feste Miete pro Monat", 90.0, EURO, eingabe=True,
+          hinweis="Übliche Spanne 50 bis 150 €. Frag trotzdem, ob der Betrieb darauf "
+                  "verzichtet — manche geben die Fläche umsonst her, wenn der Automat "
+                  "gewünscht ist.")
 ZEILE_MIETE_FEST = r - 1
 r = zeile(sr, r, "  Beteiligung am Bruttoumsatz", 0.10, PROZENT, eingabe=True,
           hinweis="Übliche Spanne 10 bis 20 %. Achtung: vom BRUTTO-Umsatz, nicht vom Gewinn.")
@@ -480,7 +481,7 @@ ZEILE_PUFFER = r - 1
 
 r += 1
 r = zeile(sr, r, "Anschaffungspreis des Automaten", 2500.0, EURO, eingabe=True,
-          hinweis="Gebraucht 800–2.500 €, neu 3.000–8.000 €. Bei Miete oder Leasing hier 0 "
+          hinweis="Gebraucht 2.000–4.000 €, neu 5.000–15.000 €. Bei Miete oder Leasing hier 0 "
                   "eintragen und die Rate unter „Sonstiges“ erfassen.")
 ZEILE_ANSCHAFFUNG = r - 1
 r = zeile(sr, r, "Erstbefüllung (gebundenes Kapital)", 250.0, EURO, eingabe=True)
@@ -641,9 +642,9 @@ WERTE = [
     ("Rohertrag je Verkauf", "0,40 – 0,80 €",
      "Bei Snacks meist höher als bei Getränken, weil der Einkauf günstiger ist "
      "und kein Pfand anfällt."),
-    ("Standortmiete fest", "0 – 80 € / Monat",
-     "Viele Betriebe verlangen nichts, wenn die Belegschaft den Automaten will. "
-     "Immer zuerst nach der kostenlosen Variante fragen."),
+    ("Standortmiete fest", "50 – 150 € / Monat",
+     "Frag trotzdem zuerst, ob der Betrieb auf die Miete verzichtet — manche tun "
+     "das, wenn die Belegschaft den Automaten selbst will."),
     ("Umsatzbeteiligung", "10 – 20 % vom Brutto",
      "Bei hohem Umsatz teurer als eine feste Miete. Rechne beide Modelle durch, "
      "bevor du unterschreibst."),
@@ -651,11 +652,13 @@ WERTE = [
      "Reine Spiralautomaten brauchen fast nur Licht und Steuerung."),
     ("Stromverbrauch mit Kühlung", "40 – 90 kWh / Monat",
      "Im Sommer und in warmen Räumen am oberen Ende. Ältere Geräte deutlich darüber."),
-    ("Automat gebraucht", "800 – 2.500 €",
-     "Auf Ersatzteilversorgung und Münzprüfer achten. Ein Gerät ohne Ersatzteile "
-     "ist beim ersten Defekt Schrott."),
-    ("Automat neu", "3.000 – 8.000 €",
-     "Rechnet sich meist erst ab mehreren Standorten oder bei Kartenzahlung."),
+    ("Automat gebraucht", "2.000 – 4.000 €, im Einzelfall mehr",
+     "Junge Geräte mit Kühlung und Kartenzahlung liegen deutlich darüber. Auf "
+     "Ersatzteilversorgung und Münzprüfer achten: ein Gerät ohne Ersatzteile ist "
+     "beim ersten Defekt Schrott."),
+    ("Automat neu", "5.000 – 15.000 €",
+     "Die Spanne ist groß: ein einfacher Spiralautomat liegt unten, ein "
+     "Kombigerät mit Kühlung und Kartenzahlung oben."),
     ("Rücklage Reparatur", "15 – 25 € / Monat",
      "Münzprüfer 150–400 €, Kühlaggregat 400–900 €, Steuerplatine 200–500 €."),
     ("Schwund und Verderb", "1 – 4 %",
