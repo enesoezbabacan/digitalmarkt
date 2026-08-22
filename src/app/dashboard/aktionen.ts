@@ -6,6 +6,7 @@ import { z } from "zod";
 
 import { db } from "@/lib/db";
 import { MAX_PREIS_CENT, MIN_PREIS_CENT, euroStringZuCent, formatEuro } from "@/lib/geld";
+import { produktZurPruefungAnBetreiberSenden } from "@/lib/mail";
 import { angemeldeteVerkaeuferId, sitzungBeenden } from "@/lib/sitzung";
 import { dsaAngabenVollstaendig } from "@/lib/validation/verkaeufer";
 
@@ -128,7 +129,20 @@ export async function zurPruefungEinreichen(formular: FormData): Promise<void> {
 
   // produktAktualisieren filtert selbst nach seller_id — ein fremdes Produkt
   // lässt sich damit auch mit erratener ID nicht verändern.
-  await db().produktAktualisieren(verkaeufer.id, produktId, { status: "review" });
+  const produkt = await db().produktAktualisieren(verkaeufer.id, produktId, {
+    status: "review",
+  });
+
+  // Bewusst ohne await auf den Erfolg der Mail zu warten — siehe
+  // registrieren/aktionen.ts für die gleiche Begründung.
+  if (produkt) {
+    void produktZurPruefungAnBetreiberSenden({
+      verkaeuferName: verkaeufer.name,
+      produktTitel: produkt.titel,
+      kategorie: produkt.kategorie,
+    });
+  }
+
   revalidatePath("/dashboard");
 }
 

@@ -3,6 +3,7 @@
 import { redirect } from "next/navigation";
 
 import { db } from "@/lib/db";
+import { neuerVerkaeuferAnBetreiberSenden } from "@/lib/mail";
 import { angemeldeteVerkaeuferId, sitzungSetzen } from "@/lib/sitzung";
 import { verkaeuferSchema } from "@/lib/validation/verkaeufer";
 import { pruefeUstId } from "@/lib/vies";
@@ -96,6 +97,15 @@ export async function registrieren(
   if ("fehler" in angelegt) {
     return { allgemeinerFehler: angelegt.fehler, werte };
   }
+
+  // Bewusst ohne await auf den Erfolg der Mail zu warten: Ein langsamer oder
+  // fehlschlagender Mailversand darf die Registrierung nicht verzögern oder
+  // scheitern lassen — die Funktion fängt ihre Fehler selbst ab.
+  void neuerVerkaeuferAnBetreiberSenden({
+    name: daten.name,
+    email: daten.email,
+    ort: daten.ort,
+  });
 
   await sitzungSetzen(angelegt.id);
 

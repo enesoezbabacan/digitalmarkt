@@ -175,6 +175,89 @@ export async function verkaufsMeldungSenden(daten: VerkaufsMeldung) {
   }
 }
 
+export type NeuerVerkaeuferDaten = {
+  name: string;
+  email: string;
+  ort: string;
+};
+
+/**
+ * Benachrichtigt den Betreiber über eine neue Verkäufer-Registrierung.
+ *
+ * Ohne diese Mail müsste der Betreiber von sich aus regelmäßig im
+ * Admin-Bereich nachschauen, ob sich jemand angemeldet hat.
+ */
+export async function neuerVerkaeuferAnBetreiberSenden(
+  daten: NeuerVerkaeuferDaten,
+) {
+  const client = resend();
+  const empfaenger = betreiberAdressen();
+  if (!client || empfaenger.length === 0) return;
+
+  try {
+    await client.emails.send({
+      from: absender(),
+      to: empfaenger,
+      subject: `Neuer Verkäufer: ${daten.name}`,
+      html: rahmen(`
+        <h1 style="font-size:22px;margin:0 0 16px">Neue Verkäufer-Registrierung</h1>
+        <p><strong>${escape(daten.name)}</strong> (${escape(daten.ort)}) hat
+           sich als Verkäufer registriert.</p>
+        <p style="font-size:14px;color:#525252">E-Mail: ${escape(daten.email)}</p>
+        <p style="margin:28px 0">
+          <a href="${seitenAdresse()}/admin"
+             style="background:#171717;color:#fff;text-decoration:none;
+                    padding:14px 24px;border-radius:6px;display:inline-block;
+                    font-weight:600">Im Betreiber-Bereich ansehen</a>
+        </p>
+      `),
+    });
+  } catch (fehler) {
+    console.error("Benachrichtigung über neuen Verkäufer fehlgeschlagen:", fehler);
+  }
+}
+
+export type ProduktZurPruefungDaten = {
+  verkaeuferName: string;
+  produktTitel: string;
+  kategorie: string;
+};
+
+/**
+ * Benachrichtigt den Betreiber, sobald ein Verkäufer ein Produkt zur
+ * Freigabe einreicht — ohne diese Mail bliebe ein eingereichtes Produkt
+ * unbemerkt im Admin-Bereich liegen, bis jemand zufällig nachschaut.
+ */
+export async function produktZurPruefungAnBetreiberSenden(
+  daten: ProduktZurPruefungDaten,
+) {
+  const client = resend();
+  const empfaenger = betreiberAdressen();
+  if (!client || empfaenger.length === 0) return;
+
+  try {
+    await client.emails.send({
+      from: absender(),
+      to: empfaenger,
+      subject: `Neues Produkt wartet auf Freigabe: ${daten.produktTitel}`,
+      html: rahmen(`
+        <h1 style="font-size:22px;margin:0 0 16px">Produkt wartet auf Freigabe</h1>
+        <p><strong>${escape(daten.verkaeuferName)}</strong> hat
+           <strong>${escape(daten.produktTitel)}</strong>
+           (${escape(daten.kategorie)}) zur Prüfung eingereicht.</p>
+        <p style="margin:28px 0">
+          <a href="${seitenAdresse()}/admin"
+             style="background:#171717;color:#fff;text-decoration:none;
+                    padding:14px 24px;border-radius:6px;display:inline-block;
+                    font-weight:600">Jetzt prüfen</a>
+        </p>
+      `),
+    });
+  } catch (fehler) {
+    console.error("Benachrichtigung über neues Produkt fehlgeschlagen:", fehler);
+  }
+}
+
 export type MeldungsMailDaten = {
   melderEmail: string;
   melderName?: string | null;
