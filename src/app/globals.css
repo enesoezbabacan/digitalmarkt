@@ -23,4 +23,14 @@ body {
     Helvetica,
     Arial,
     sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
+
+/* Sanfter Verlaufsplatzhalter für Produkte ohne eigenes Vorschaubild —
+   je Kategorie ein eigener Farbton, damit die Karten trotzdem
+   unterscheidbar bleiben statt alle gleich grau zu sein. */
+.platzhalter-eur { background: linear-gradient(135deg, #eef2ff, #e0e7ff); }
+.platzhalter-doc { background: linear-gradient(135deg, #fdf4ff, #fae8ff); }
+.platzhalter-vorlage { background: linear-gradient(135deg, #ecfeff, #cffafe); }
+.platzhalter-standard { background: linear-gradient(135deg, #fafaf9, #f0efed); }
