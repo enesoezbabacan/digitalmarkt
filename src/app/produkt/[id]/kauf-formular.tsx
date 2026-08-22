@@ -12,7 +12,7 @@ function KaufButton({ gesperrt }: { gesperrt: boolean }) {
     <button
       type="submit"
       disabled={pending || gesperrt}
-      className="mt-4 w-full rounded-md bg-neutral-900 px-4 py-3 font-medium text-white hover:bg-neutral-700 disabled:cursor-not-allowed disabled:bg-neutral-300 disabled:text-neutral-500"
+      className="mt-4 w-full rounded-xl bg-neutral-900 px-4 py-3 font-medium text-white transition hover:bg-neutral-700 disabled:cursor-not-allowed disabled:bg-neutral-300 disabled:text-neutral-500"
     >
       {/*
         § 312j Abs. 3 BGB verlangt genau diese (oder eine gleich eindeutige)
@@ -37,7 +37,7 @@ export function KaufFormular({
 
   if (!verkaeuferBereit) {
     return (
-      <p className="mt-5 rounded-md border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900">
+      <p className="mt-5 rounded-xl border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900">
         Dieser Verkäufer hat seine Verifizierung noch nicht abgeschlossen und
         kann derzeit keine Zahlungen empfangen.
       </p>
@@ -49,7 +49,7 @@ export function KaufFormular({
       <input type="hidden" name="produkt_id" value={produktId} />
 
       {zustand.fehler && (
-        <p className="mb-3 rounded-md border border-red-300 bg-red-50 p-3 text-sm text-red-800">
+        <p className="mb-3 rounded-xl border border-red-300 bg-red-50 p-3 text-sm text-red-800">
           {zustand.fehler}
         </p>
       )}
@@ -63,7 +63,7 @@ export function KaufFormular({
         type="email"
         required
         placeholder="du@beispiel.de"
-        className="w-full rounded-md border border-neutral-300 px-3 py-2"
+        className="w-full rounded-xl border border-neutral-300 bg-white px-3 py-2.5 outline-none focus:border-neutral-500"
       />
       <p className="mt-1 text-xs text-neutral-500">
         An diese Adresse geht dein Download-Link.

@@ -13,7 +13,7 @@ function Absenden() {
     <button
       type="submit"
       disabled={pending}
-      className="rounded-md bg-neutral-900 px-4 py-2.5 font-medium text-white hover:bg-neutral-700 disabled:cursor-not-allowed disabled:bg-neutral-400"
+      className="rounded-full bg-neutral-900 px-5 py-2.5 font-medium text-white transition hover:bg-neutral-700 disabled:cursor-not-allowed disabled:bg-neutral-400"
     >
       {pending ? "Wird hochgeladen…" : "Als Entwurf speichern"}
     </button>
@@ -27,7 +27,7 @@ export function ProduktFormular({ gesperrt }: { gesperrt?: string }) {
 
   if (gesperrt) {
     return (
-      <p className="rounded-md border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900">
+      <p className="rounded-2xl border border-amber-200 bg-amber-50/70 p-4 text-sm text-amber-900">
         {gesperrt}
       </p>
     );
@@ -36,12 +36,12 @@ export function ProduktFormular({ gesperrt }: { gesperrt?: string }) {
   return (
     <form action={aktion} className="space-y-4">
       {zustand.fehler && (
-        <p className="rounded-md border border-red-300 bg-red-50 p-3 text-sm text-red-800">
+        <p className="rounded-xl border border-red-300 bg-red-50 p-3 text-sm text-red-800">
           {zustand.fehler}
         </p>
       )}
       {zustand.erfolg && (
-        <p className="rounded-md border border-green-300 bg-green-50 p-3 text-sm text-green-900">
+        <p className="rounded-xl border border-green-200 bg-green-50/70 p-3 text-sm text-green-900">
           {zustand.erfolg}
         </p>
       )}
@@ -54,7 +54,7 @@ export function ProduktFormular({ gesperrt }: { gesperrt?: string }) {
           id="titel"
           name="titel"
           required
-          className="w-full rounded-md border border-neutral-300 px-3 py-2"
+          className="w-full rounded-xl border border-neutral-300 px-3 py-2.5 outline-none focus:border-neutral-500"
         />
       </div>
 
@@ -67,7 +67,7 @@ export function ProduktFormular({ gesperrt }: { gesperrt?: string }) {
           name="beschreibung"
           rows={5}
           required
-          className="w-full rounded-md border border-neutral-300 px-3 py-2"
+          className="w-full rounded-xl border border-neutral-300 px-3 py-2.5 outline-none focus:border-neutral-500"
         />
       </div>
 
@@ -79,7 +79,7 @@ export function ProduktFormular({ gesperrt }: { gesperrt?: string }) {
           <select
             id="kategorie"
             name="kategorie"
-            className="w-full rounded-md border border-neutral-300 bg-white px-3 py-2"
+            className="w-full rounded-xl border border-neutral-300 bg-white px-3 py-2.5 outline-none focus:border-neutral-500"
           >
             {KATEGORIEN.map((k) => (
               <option key={k} value={k}>
@@ -99,7 +99,7 @@ export function ProduktFormular({ gesperrt }: { gesperrt?: string }) {
             inputMode="decimal"
             placeholder="19,90"
             required
-            className="w-full rounded-md border border-neutral-300 px-3 py-2"
+            className="w-full rounded-xl border border-neutral-300 px-3 py-2.5 outline-none focus:border-neutral-500"
           />
           <p className="mt-1 text-xs text-neutral-500">
             Davon behält der Marktplatz {PROVISION_PROZENT} % Provision.

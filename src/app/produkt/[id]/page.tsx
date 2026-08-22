@@ -92,7 +92,7 @@ export default async function Produktseite({ params }: PageProps<"/produkt/[id]"
   };
 
   return (
-    <article className="grid gap-10 lg:grid-cols-[1fr_20rem]">
+    <article>
       {suchmaschinenErlaubt() && (
         <script
           type="application/ld+json"
@@ -105,61 +105,96 @@ export default async function Produktseite({ params }: PageProps<"/produkt/[id]"
         />
       )}
 
-      <div>
-        <Link href="/" className="text-sm text-neutral-600 hover:underline">
-          ← Zurück zum Katalog
-        </Link>
+      <Link
+        href="/"
+        className="text-sm text-neutral-500 transition hover:text-neutral-900"
+      >
+        ← Zurück zum Katalog
+      </Link>
 
-        <span className="mt-4 block text-xs font-medium tracking-wide text-neutral-500 uppercase">
-          {produkt.kategorie}
-        </span>
-        <h1 className="mt-1 text-3xl font-semibold tracking-tight">
-          {produkt.titel}
-        </h1>
+      <div className="mt-6 grid gap-10 lg:grid-cols-[1fr_20rem]">
+        <div>
+          <div
+            className={`flex aspect-[16/9] items-center justify-center rounded-2xl ${platzhalterKlasse(produkt.kategorie)}`}
+          >
+            <span className="text-6xl font-semibold text-neutral-400/70 select-none">
+              {produkt.titel.charAt(0).toUpperCase()}
+            </span>
+          </div>
 
-        <div className="mt-6 whitespace-pre-line text-neutral-700">
-          {produkt.beschreibung}
+          <span className="mt-7 block text-xs font-medium tracking-wide text-neutral-500 uppercase">
+            {produkt.kategorie}
+          </span>
+          <h1 className="mt-1.5 text-3xl font-semibold tracking-[-0.015em] text-balance sm:text-4xl">
+            {produkt.titel}
+          </h1>
+
+          <div className="mt-6 max-w-2xl space-y-4 whitespace-pre-line text-neutral-600">
+            {produkt.beschreibung}
+          </div>
         </div>
+
+        <aside className="h-fit rounded-2xl border border-neutral-200 bg-neutral-50/60 p-6">
+          <p className="text-2xl font-semibold tracking-[-0.01em]">
+            {formatEuro(produkt.preis_cent)}
+          </p>
+          <p className="mt-1.5 text-xs text-neutral-500">
+            {preisHinweisLang(produkt.verkaeufer.kleinunternehmer)}
+          </p>
+          <p className="mt-2 text-xs text-neutral-500">{ABSETZBAR_HINWEIS}</p>
+
+          <div className="mt-5">
+            <KaufFormular
+              produktId={produkt.id}
+              verkaeuferBereit={verkaeuferBereit}
+            />
+          </div>
+
+          <dl className="mt-6 space-y-2.5 border-t border-neutral-200 pt-5 text-sm">
+            <div className="flex justify-between gap-4">
+              <dt className="text-neutral-500">Anbieter</dt>
+              <dd className="text-right font-medium">{produkt.verkaeufer.name}</dd>
+            </div>
+            <div className="flex justify-between gap-4">
+              <dt className="text-neutral-500">Sitz</dt>
+              <dd className="text-right">
+                {produkt.verkaeufer.ort},{" "}
+                {LAENDER_NAMEN[produkt.verkaeufer.land] ?? produkt.verkaeufer.land}
+              </dd>
+            </div>
+            <div className="flex justify-between gap-4">
+              <dt className="text-neutral-500">Lieferung</dt>
+              <dd className="text-right">Sofortiger Download</dd>
+            </div>
+          </dl>
+
+          <p className="mt-5 text-xs text-neutral-500">
+            Dieses Produkt wird von einem unabhängigen Verkäufer angeboten. Du
+            schließt den Vertrag mit ihm, nicht mit dem Marktplatz.{" "}
+            <Link
+              href={`/abuse?produkt=${produkt.id}`}
+              className="underline decoration-neutral-300 underline-offset-2 hover:decoration-neutral-900"
+            >
+              Rechtsverletzung melden
+            </Link>
+          </p>
+        </aside>
       </div>
-
-      <aside className="h-fit rounded-lg border border-neutral-200 p-5">
-        <p className="text-2xl font-semibold">{formatEuro(produkt.preis_cent)}</p>
-        <p className="mt-1 text-xs text-neutral-500">
-          {preisHinweisLang(produkt.verkaeufer.kleinunternehmer)}
-        </p>
-        <p className="mt-2 text-xs text-neutral-600">{ABSETZBAR_HINWEIS}</p>
-
-        <KaufFormular
-          produktId={produkt.id}
-          verkaeuferBereit={verkaeuferBereit}
-        />
-
-        <dl className="mt-6 space-y-2 border-t border-neutral-200 pt-4 text-sm">
-          <div className="flex justify-between gap-4">
-            <dt className="text-neutral-500">Anbieter</dt>
-            <dd className="text-right font-medium">{produkt.verkaeufer.name}</dd>
-          </div>
-          <div className="flex justify-between gap-4">
-            <dt className="text-neutral-500">Sitz</dt>
-            <dd className="text-right">
-              {produkt.verkaeufer.ort},{" "}
-              {LAENDER_NAMEN[produkt.verkaeufer.land] ?? produkt.verkaeufer.land}
-            </dd>
-          </div>
-          <div className="flex justify-between gap-4">
-            <dt className="text-neutral-500">Lieferung</dt>
-            <dd className="text-right">Sofortiger Download</dd>
-          </div>
-        </dl>
-
-        <p className="mt-5 text-xs text-neutral-500">
-          Dieses Produkt wird von einem unabhängigen Verkäufer angeboten. Du
-          schließt den Vertrag mit ihm, nicht mit dem Marktplatz.{" "}
-          <Link href={`/abuse?produkt=${produkt.id}`} className="underline">
-            Rechtsverletzung melden
-          </Link>
-        </p>
-      </aside>
     </article>
   );
+}
+
+/** Ordnet jeder Kategorie einen eigenen sanften Verlaufston zu, damit
+ * Produkte ohne eigenes Vorschaubild trotzdem unterscheidbar wirken.
+ * Gleiche Zuordnung wie auf der Startseite, damit Kategorien konsistent
+ * wiedererkennbar bleiben. */
+function platzhalterKlasse(kategorie: string): string {
+  const key = kategorie.toLowerCase();
+  if (key.includes("vorlage") || key.includes("template"))
+    return "platzhalter-vorlage";
+  if (key.includes("dokument") || key.includes("vertrag"))
+    return "platzhalter-doc";
+  if (key.includes("finanz") || key.includes("euer") || key.includes("steuer"))
+    return "platzhalter-eur";
+  return "platzhalter-standard";
 }

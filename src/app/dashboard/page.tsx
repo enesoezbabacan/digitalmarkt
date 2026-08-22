@@ -43,17 +43,17 @@ export default async function Dashboard() {
     <div>
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-semibold tracking-tight">
+          <h1 className="text-3xl font-semibold tracking-[-0.015em]">
             Verkäufer-Bereich
           </h1>
-          <p className="mt-1 text-neutral-600">
+          <p className="mt-1.5 text-neutral-500">
             Angemeldet als {verkaeufer.name} ({verkaeufer.email})
           </p>
         </div>
         <form action={abmelden}>
           <button
             type="submit"
-            className="rounded-md border border-neutral-300 px-3 py-2 text-sm hover:bg-neutral-100"
+            className="rounded-full border border-neutral-300 px-4 py-2 text-sm transition hover:bg-neutral-100"
           >
             Abmelden
           </button>
@@ -61,16 +61,16 @@ export default async function Dashboard() {
       </div>
 
       {!stripeStatus.verbunden && (
-        <div className="mt-6 rounded-md border border-blue-300 bg-blue-50 p-4 text-sm text-blue-900">
+        <div className="mt-6 rounded-2xl border border-blue-200 bg-blue-50/70 p-5 text-sm text-blue-900">
           <p>
             Bevor du Geld empfangen kannst, musst du dich bei Stripe
             verifizieren — Ausweis, Gewerbeanmeldung und Bankverbindung.
             Produkte kannst du schon jetzt als Entwurf anlegen.
           </p>
-          <form action={stripeOnboardingStarten} className="mt-3">
+          <form action={stripeOnboardingStarten} className="mt-4">
             <button
               type="submit"
-              className="rounded-md bg-blue-900 px-4 py-2 font-medium text-white hover:bg-blue-800"
+              className="rounded-full bg-blue-900 px-5 py-2.5 font-medium text-white transition hover:bg-blue-800"
             >
               Jetzt bei Stripe verifizieren
             </button>
@@ -79,17 +79,17 @@ export default async function Dashboard() {
       )}
 
       {stripeStatus.verbunden && !stripeStatus.auszahlungBereit && (
-        <div className="mt-6 rounded-md border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900">
+        <div className="mt-6 rounded-2xl border border-amber-200 bg-amber-50/70 p-5 text-sm text-amber-900">
           <p>
             Deine Stripe-Verifizierung ist noch nicht abgeschlossen
             {stripeStatus.offenePunkte.length > 0 &&
               ` — offen: ${stripeStatus.offenePunkte.join(", ")}`}
             . Bis dahin kannst du keine Auszahlungen empfangen.
           </p>
-          <form action={stripeOnboardingStarten} className="mt-3">
+          <form action={stripeOnboardingStarten} className="mt-4">
             <button
               type="submit"
-              className="rounded-md border border-amber-900 px-4 py-2 font-medium text-amber-900 hover:bg-amber-100"
+              className="rounded-full border border-amber-900 px-5 py-2.5 font-medium text-amber-900 transition hover:bg-amber-100"
             >
               Verifizierung fortsetzen
             </button>
@@ -98,7 +98,7 @@ export default async function Dashboard() {
       )}
 
       {stripeStatus.verbunden && stripeStatus.auszahlungBereit && (
-        <p className="mt-6 rounded-md border border-green-300 bg-green-50 p-4 text-sm text-green-900">
+        <p className="mt-6 rounded-2xl border border-green-200 bg-green-50/70 p-5 text-sm text-green-900">
           Deine Stripe-Verifizierung ist abgeschlossen. Auszahlungen sind
           aktiv.
         </p>
@@ -117,12 +117,14 @@ export default async function Dashboard() {
         </p>
       )}
 
-      <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_24rem]">
+      <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_24rem]">
         <section>
-          <h2 className="text-xl font-semibold">Deine Produkte</h2>
+          <h2 className="text-xl font-semibold tracking-[-0.01em]">
+            Deine Produkte
+          </h2>
 
           {produkte.length === 0 ? (
-            <p className="mt-3 rounded-lg border border-dashed border-neutral-300 p-8 text-center text-neutral-500">
+            <p className="mt-3 rounded-2xl border border-dashed border-neutral-300 p-10 text-center text-neutral-500">
               Du hast noch keine Produkte angelegt.
             </p>
           ) : (
@@ -130,7 +132,7 @@ export default async function Dashboard() {
               {produkte.map((produkt) => (
                 <li
                   key={produkt.id}
-                  className="rounded-lg border border-neutral-200 p-4"
+                  className="rounded-2xl border border-neutral-200 p-5 transition hover:border-neutral-300"
                 >
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div>
@@ -158,7 +160,7 @@ export default async function Dashboard() {
                       <input type="hidden" name="produkt_id" value={produkt.id} />
                       <button
                         type="submit"
-                        className="rounded-md border border-neutral-300 px-3 py-1.5 text-sm hover:bg-neutral-100"
+                        className="rounded-full border border-neutral-300 px-4 py-1.5 text-sm transition hover:bg-neutral-100"
                       >
                         Zur Prüfung einreichen
                       </button>
@@ -169,17 +171,21 @@ export default async function Dashboard() {
             </ul>
           )}
 
-          <h2 className="mt-10 text-xl font-semibold">Deine Verkäufe</h2>
-          <p className="mt-3 rounded-lg border border-neutral-200 p-4 text-sm text-neutral-600">
+          <h2 className="mt-12 text-xl font-semibold tracking-[-0.01em]">
+            Deine Verkäufe
+          </h2>
+          <p className="mt-3 rounded-2xl border border-neutral-200 p-5 text-sm text-neutral-500">
             {bestellungen.length === 0
               ? "Noch keine Verkäufe. Sobald die Zahlungsabwicklung in Phase 2 steht, erscheinen sie hier."
               : `${bestellungen.length} Verkäufe, Umsatz ${formatEuro(umsatz)}.`}
           </p>
         </section>
 
-        <section className="h-fit rounded-lg border border-neutral-200 p-5">
-          <h2 className="text-xl font-semibold">Neues Produkt</h2>
-          <p className="mt-1 mb-4 text-sm text-neutral-600">
+        <section className="h-fit rounded-2xl border border-neutral-200 bg-neutral-50/60 p-6">
+          <h2 className="text-xl font-semibold tracking-[-0.01em]">
+            Neues Produkt
+          </h2>
+          <p className="mt-1.5 mb-5 text-sm text-neutral-500">
             Neue Produkte werden als Entwurf gespeichert und erscheinen erst
             nach Freigabe im Katalog.
           </p>
